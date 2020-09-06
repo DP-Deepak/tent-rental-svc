@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
-import { getToken, removeToken } from '../../utils/tokenHandling';
+import { removeToken } from '../../utils/tokenHandling';
 import { useHistory } from "react-router-dom";
 
 const Navbar = ({ isAuthenticated, setAuthStatus }) => {
   const history = useHistory()
-  //Line 11 <a onClick={logout}>
-  // const [checkToken, checkingToken] = useState(getToken())
   const authLinks = (
     <ul>
       <li><a href="/customer">Customer</a></li>
@@ -18,7 +16,6 @@ const Navbar = ({ isAuthenticated, setAuthStatus }) => {
         <Link to='/transaction'>Transactions</Link>
       </li>
       <li className="hide-sm" >
-        {/* <Link to='/login'>Login</Link> */}
         <button className="fas fa-sign-out-alt" onClick={() => { removeToken(); setAuthStatus(false); history.push('/login') }}  >
           {`   `}
           Logout

@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { getQuery } from '../../api/api';
 import Loader from '../Loader/Loader';
 import CustomerTable from '../Table/CustomTable'
@@ -15,7 +14,6 @@ class Customer extends React.Component {
     this.state = {
       loading: true,
       customers: {},
-      // column: [],
       isError: false,
       open: false,
     }
@@ -36,7 +34,6 @@ class Customer extends React.Component {
     try {
       const res = await getQuery('customer')
       this.setState({ loading: false, customers: res.data })
-      // this.setState({ loading: false, customers: res.data, column: Object.keys(res.data[0]) })
     } catch (err) {
       this.setState({ loading: false, isError: true })
     }
@@ -44,12 +41,9 @@ class Customer extends React.Component {
 
   render() {
     const { loading, customers, isError, open } = this.state
-    // const { loading, customers, column, isError, open } = this.state
     const column = ['customer_name']
-    console.log('==open=customer=', open);
     return < SharedSnackbarConsumer >
       {({ openSnackbar }) => {
-        console.log('---data---', customers);
         return (
           (loading) ? <Loader /> : ((isError) ? (this.handleError(openSnackbar)) :
             <>

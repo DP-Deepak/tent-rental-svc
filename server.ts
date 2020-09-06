@@ -1,4 +1,3 @@
-import { usersRouter } from './src/routes/api/user';
 import * as express from 'express';
 import { connectDB } from './src/config/db';
 import { envVariable } from './src/config/configuration';
@@ -20,5 +19,3 @@ app.use('/api/customer', customerRouter)
 app.use('/api/transaction', transactionRouter)
 
 app.listen(PORT, () => console.log('Server started on PORT:', PORT))
-
-

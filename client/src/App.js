@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './App.css'
-import Navbar from './components/layout/Navbar';
-import { Landing } from './components/layout/Landing';
+import { Navbar } from './components/layout';
+import Landing from './components/layout';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './components/auth/Login';
+import Login from './components/auth';
 import { setAuthToken, getToken } from './utils/tokenHandling';
 import { SharedSnackbarProvider } from './context/SharedSnackbar.context';
-import Customer from './components/customer/Customer';
-import Product from './components/product/Product';
-import Transaction from './components/transaction/Transaction';
+import { Customer } from './components/customer';
+import { Product } from './components/product';
+import { Transaction } from './components/transaction';
 import { AuthRoute } from './AuthRoute';
 
 
@@ -18,7 +18,6 @@ if (localStorage.token) {
 
 const App = () => {
   const [isAuthenticated, setAuthStatus] = useState(!!getToken())
-  // console.log('=isAuthenticated==', isAuthenticated);
   return (
     <SharedSnackbarProvider>
       <Router>

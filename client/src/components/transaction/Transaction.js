@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { getQuery } from '../../api/api';
 import Loader from '../Loader/Loader';
 import CustomerTable from '../Table/CustomTable'
@@ -8,13 +7,8 @@ import { SharedSnackbarConsumer } from '../../context/SharedSnackbar.context';
 import { Button } from '@material-ui/core';
 import TransactionDialogBox from './DialogBox/TransactionDialogBox';
 import moment from 'moment'
-import DownloadPdf from '../DownloadPdf/Download';
+import DownloadPdf from '../DownloadPdf';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
-});
 
 class Transaction extends React.Component {
   constructor(props) {
@@ -55,7 +49,6 @@ class Transaction extends React.Component {
     }
     catch (error) {
 
-      console.log(error);
       this.setState({ loading: false, isError: true })
     }
   }
@@ -77,7 +70,6 @@ class Transaction extends React.Component {
 
   render() {
     const { loading, transaction, column, isError, open, pdfData, pdfColumn, openReverse } = this.state
-    console.log('===isError===', isError);
     return (
       <SharedSnackbarConsumer>
         {({ openSnackbar }) => {

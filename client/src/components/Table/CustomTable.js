@@ -35,7 +35,6 @@ const CustomTable = (props) => {
   const {
     classes, data, column
   } = props;
-  console.log('== data, column, order, act==', classes,data);
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>

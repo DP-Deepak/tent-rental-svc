@@ -1,5 +1,4 @@
 import * as express from 'express';
-import { middleware } from '../../middleware/auth';
 import UserModel from '../../models/UserModel';
 import { check, validationResult } from 'express-validator'
 import * as bcrypt from 'bcryptjs'
@@ -19,7 +18,6 @@ authRouter.post('/', [
   check('password', 'Please enter password').exists(),
 ],
   async (req, res) => {
-    // console.log('====auth==', req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
@@ -61,7 +59,6 @@ authRouter.post('/', [
       )
       //Re-build Data for the User
     } catch (e) {
-      console.log('Error in users route:', e.message);
       res.status(500).send('Server Error')
     }
   })

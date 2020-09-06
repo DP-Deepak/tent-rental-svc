@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -49,10 +49,7 @@ class TransactionDialogBox extends React.Component {
       alreadyBookedQuantity,
       quantity, availableQuantity } = this.state
     const { transaction_type } = this.props
-    if (customer_id && product_id && transaction_type && quantity) {
-      if (quantity >= 0 && quantity > availableQuantity) {
-        openSnackbar('Available quantity is insufficient')
-      }
+    if (customer_id && product_id && transaction_type && quantity > 0 && quantity <= availableQuantity) {
       try {
         await postData({
           customer_id,
@@ -67,14 +64,14 @@ class TransactionDialogBox extends React.Component {
       } catch (error) {
         openSnackbar('Something went wrong!')
       }
+
     } else {
 
-      openSnackbar('Please fill all the details')
+      openSnackbar('Please enter correct details')
     }
   }
   saveReverseTransaction = async (openSnackbar) => {
     const { newReverseTransaction, quantity, transaction_id } = this.state
-    console.log('== newReverseTransaction, quantity ==', newReverseTransaction, quantity);
 
     if (transaction_id && quantity) {
       if (quantity < 0 && quantity > newReverseTransaction.quantity) {
@@ -83,18 +80,15 @@ class TransactionDialogBox extends React.Component {
       try {
         newReverseTransaction.quantity = quantity
         await postData(newReverseTransaction, 'transaction')
-        // const productData = await getQuery(`product/?product_id=${newReverseTransaction.product_id}`)
         const allProducts = await getQuery('product')
         if (allProducts.data) {
           const productDetails = allProducts.data.filter(product => newReverseTransaction.product_id.toString() === product._id)
 
-          console.log('==productDetails.product_title==', parseInt(productDetails[0].quantity) ,parseInt(quantity));
 
-          const data = await updateData({
+          await updateData({
             product_title: productDetails[0].product_title,
             quantity_booked: parseInt(productDetails[0].quantity_booked) - parseInt(quantity)
           }, 'product')
-          console.log('==data==', data);
         }
 
         window.location.reload();
@@ -211,7 +205,6 @@ class TransactionDialogBox extends React.Component {
                   id="outlined-number"
                   required
                   onChange={this.onChangeHandler('quantity')}
-                  label="Quantity"
                   type="number"
                   label={`${availableQuantity} available`}
                 />
@@ -241,7 +234,6 @@ class TransactionDialogBox extends React.Component {
                   id="outlined-number"
                   required
                   onChange={this.onChangeHandler('quantity')}
-                  label="Quantity"
                   type="number"
                   label={`${newReverseTransaction.quantity} items on rent`}
                 />

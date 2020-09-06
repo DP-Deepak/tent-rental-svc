@@ -6,17 +6,15 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import { postData } from '../../../api/api';
 
-const DialogBox = (props) => {
+const CustomerDialogBox = (props) => {
   const [customerName, setCustomerName] = useState('')
   const { open, handleOpen, openSnackbar } = props
   const handleChange = (e) => {
     setCustomerName(e.target.value)
-    console.log('==e==', customerName);
   }
 
   const saveCustomer = async () => {
     try {
-      console.log('==customerName===d==', customerName);
       await postData({ customer_name: customerName }, 'customer')
       window.location.reload();
     } catch (error) {
@@ -54,4 +52,4 @@ const DialogBox = (props) => {
   );
 }
 
-export default DialogBox;
+export default CustomerDialogBox;

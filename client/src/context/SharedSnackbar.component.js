@@ -8,7 +8,7 @@ const SharedSnackbar = () => (
     {({ snackbarIsOpen, message, closeSnackbar }) => (
       <Snackbar
         anchorOrigin={{
-          vertical: 'bottom',
+          vertical: 'top',
           horizontal: 'center',
         }}
         open={snackbarIsOpen}

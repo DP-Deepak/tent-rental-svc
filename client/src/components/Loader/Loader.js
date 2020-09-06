@@ -11,18 +11,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Loader() {
+const Loader = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <LinearProgress />
-      {/* <LinearProgress color="secondary" />
-      <LinearProgress />
-      <LinearProgress color="secondary" />
-      <LinearProgress />
-      <LinearProgress color="secondary" />
-      <LinearProgress /> */}
     </div>
   );
 }
+
+export default Loader

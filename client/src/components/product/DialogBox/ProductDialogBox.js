@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -23,11 +23,7 @@ class ProductDialogBox extends React.Component {
       quantity_booked,
       price } = this.state
 
-    if (product_title && quantity_total && quantity_booked && price) {
-      if(quantity_total<quantity_booked) {
-        openSnackbar('Total quantity cannot be less than booked quantity')
-
-      }
+    if (product_title && quantity_total && quantity_booked && price && quantity_total < quantity_booked) {
       try {
         await postData({
           product_title,
@@ -41,7 +37,7 @@ class ProductDialogBox extends React.Component {
       }
     } else {
 
-      openSnackbar('Please fill all the details')
+      openSnackbar('Please fill the correct details')
     }
   }
 

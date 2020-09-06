@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { getQuery } from '../../api/api';
 import Loader from '../Loader/Loader';
 import CustomerTable from '../Table/CustomTable'
@@ -9,12 +8,6 @@ import { Button } from '@material-ui/core';
 import ProductDialogBox from './DialogBox/ProductDialogBox';
 import DownloadPdf from '../DownloadPdf/Download';
 
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
-});
 
 class Product extends React.Component {
   constructor(props) {
@@ -56,7 +49,6 @@ class Product extends React.Component {
       this.setState({ loading: false, pdfColumn, pdfData, products, column: Object.keys(products[0]) })
 
     } catch (error) {
-      console.log('==err21===', error);
       this.setState({ loading: false, isError: true })
     }
   }
@@ -78,16 +70,16 @@ class Product extends React.Component {
               <Button style={{ marginTop: '30px' }} variant="outlined" color="primary" onClick={(e) => this.openDialogBox(e, true)}>
                 Add Product
            </Button>
-              {open && <ProductDialogBox open handleOpen={this.openDialogBox} openSnackbar={openSnackbar} />}
               {
                 column.length &&
                 <Button style={{ marginTop: '30px', marginLeft: '50px' }} variant="outlined" color="primary"
                   onClick={() => DownloadPdf(pdfColumn, pdfData)} >
                   Export to pdf
            </Button>
-              } </>
+              }
+              {open && <ProductDialogBox open handleOpen={this.openDialogBox} openSnackbar={openSnackbar} />}
+            </>
           ))
-
       }
       }
     </SharedSnackbarConsumer >

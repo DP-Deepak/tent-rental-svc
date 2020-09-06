@@ -32,7 +32,7 @@ const Login = ({setAuthStatus}) => {
       {({ openSnackbar }) => {
         return (!getToken()) ?
           (<>
-            <h1 h1 h1 className="large text-primary">Sign In</h1>
+            <h1 className="large text-primary">Sign In</h1>
             <form className="form" action="create-profile.html" onSubmit={e => onSubmit(e, openSnackbar)} >
               <div className="form-group">
                 <input
