@@ -16,7 +16,7 @@ transactionRouter.get('/',
       let transaction = (req.query.transaction_type) ?
         await TransactionModel.find({ transaction_type: req.query.transaction_type })
         : await TransactionModel.find({})
-      console.log('===1===7===', transaction.length);
+      // console.log('===1===7===', transaction.length);
 
       if (!transaction) {
         return res.status(404).send('No transaction found')

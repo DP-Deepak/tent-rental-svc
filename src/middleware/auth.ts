@@ -17,8 +17,8 @@ export const middleware = (req, res, next) => {
     const decoded = jwt.verify(token, envVariable.jwtSecret)
 
     req.user = decoded.user;
-    console.log('==req.user==middleware=', req.user);
-    console.log('==req.user==middleware=', req.body);
+    // console.log('==req.user==middleware=', req.user);
+    // console.log('==req.user==middleware=', req.body);
 
     next();
   } catch (err) {

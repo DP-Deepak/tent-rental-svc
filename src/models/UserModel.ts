@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-});
+}, { versionKey: false });
 
 //pre save hook
 UserSchema.pre('save', function preSave() {
