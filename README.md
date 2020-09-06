@@ -85,6 +85,8 @@ You can also add any number of product of your choice.
 ## `Add Product:`
 
 When you use the 'add product' option. It will open a popup and will ask you to fill some necessary details, rest details will be added automatically.
+### Note:
+If you add the product which already exist in the inventory, in this case it will update the quantity of existing one accordingly.
 
 To avoid the incorrect details, Error prevention methods are used.
 
@@ -161,6 +163,85 @@ After successful login, user can't get back to the login page until there is an 
 Data is highly secured in UI as well as in the backend.
 
 # Server :
+## API with sample payloads :
+Base URL: http://localhost:9000/api
+Note: Use the below headers throughout the application.
+headers: {
+"Content-Type": "application/json",
+"x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY1MjdlMGFkYzhkZjY3Y2NlNjAxYWRhIn0sImlhdCI6MTU5OTI0MzQ3NH0.IZU1fy5dkWYCwTN4fL4M6KE263E3_af3k9pb2w-DT40"
 
-* To access the server directly(use postman or any other third party application). First you need the token of an authenticated user.
+}
+
+## POST
+`/auth`
+* First get the token from server.
+
+Sample payload :
+{
+    "email": "admin@gmail.com",
+    "password": "password"
+}
+
+
+`/customer`
+* Create a customer.
+
+Sample payload :
+{
+   "customer_name":"Deepak Prajapati"
+}
+
+`/product`
+* Add product in inventory.
+Sample payload :
+{
+   "product_title":"Halogen Light",
+"quantity_total":"100",
+"quantity_booked":"10",
+"price":"200"
+}
+
+`/transaction`
+* Create transaction.
+
+Sample payload :
+{
+"customer_id":"5f54def14da4d631aef70dc",
+"product_id":"5f54def14awc2d631aef70dc",
+"transaction_type": "IN",
+"quantity":"100",
+"transaction_id_parent":"5f54def14aw1dw631aef70dc"
+}
+
+
+## GET
+
+`/customer`
+* Return all the existing customers.
+`/product`
+* Return all the existing products.
+* Also accepts product_title in query params.
+
+`/transaction`
+* Return all transaction.
+* Also accepts transaction_type in query params.
+
+## PUT
+`product`
+* Update the products available in inventory.
+ Sample payload:
+ {
+    "product_title":"Fan",
+   "quantity_booked":"3"
+}
+
+
+
+
+
+
+
+
+
+
 
