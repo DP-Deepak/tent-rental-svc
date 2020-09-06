@@ -1,10 +1,10 @@
 import * as express from 'express';
-import { middleware } from '../../middleware/auth';
 import UserModel from '../../models/UserModel';
 import { check, validationResult } from 'express-validator'
 import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken'
 import { envVariable } from '../../config/configuration';
+import seed from '../../utils/seedData';
 
 
 const authRouter = express.Router();
@@ -18,7 +18,6 @@ authRouter.post('/', [
   check('password', 'Please enter password').exists(),
 ],
   async (req, res) => {
-    console.log('====auth==', req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
@@ -34,14 +33,14 @@ authRouter.post('/', [
           .json({ errors: [{ msg: 'User not found' }] })
       }
 
-
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
         return res
-          .status(400)
-          .json({ errors: [{ msg: 'Incorrect password' }] })
+        .status(400)
+        .json({ errors: [{ msg: 'Incorrect password' }] })
       }
+      await seed()
 
       // Return jsonwebtoken
       const payload = {
@@ -58,9 +57,8 @@ authRouter.post('/', [
           res.json({ token })
         }
       )
-
+      //Re-build Data for the User
     } catch (e) {
-      console.log('Error in users route:', e.message);
       res.status(500).send('Server Error')
     }
   })

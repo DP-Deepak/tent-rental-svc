@@ -17,7 +17,7 @@ const ProductSchema = new mongoose.Schema({
   price: {
     type: Number,
   },
-});
+},{versionKey: false});
 //pre save hook
 ProductSchema.pre('save', function preSave() {
   this.product_id = this._id.toString();

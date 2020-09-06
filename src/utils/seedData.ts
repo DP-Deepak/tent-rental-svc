@@ -4,6 +4,7 @@ import { envVariable } from '../config/configuration';
 import ProductModel from '../models/ProductModel';
 import { products, customers } from './mockData';
 import CustomerModel from '../models/CustomerModel';
+import { TransactionModel } from '../models';
 
 const seed = async () => {
 
@@ -35,13 +36,16 @@ const seed = async () => {
 
   //Re-build Customers
   let customer = await CustomerModel.deleteMany({})
-  customers.forEach(async (oneCustomer, index) => {
+  customers.forEach(async (oneCustomer) => {
     const { customer_name } = oneCustomer
     customer = new CustomerModel({
       customer_name
     })
     await customer.save()
   });
+
+  //Remove all transactions
+  await TransactionModel.deleteMany({})
 
 }
 

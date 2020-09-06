@@ -13,14 +13,13 @@ productRouter.get('/',
     middleware,
   async (req, res) => {
     try {
-      let product = await ProductModel.find({ })
+      let product = await ProductModel.find({ }).sort( { "product_title": 1 } )
       if (!product) {
         return res.status(404).send('No product found')
       }
 
       return res.status(200).json(product);
     } catch (e) {
-      console.log('Error in customer:', e.message);
       res.status(500).send('Server Error')
     }
   }
@@ -75,7 +74,6 @@ productRouter.post('/',
       await product.save()
       return res.status(200).json(product);
     } catch (e) {
-      console.log('Error in product:', e.message);
       res.status(500).send('Server Error')
     }
   }
@@ -104,7 +102,6 @@ productRouter.put('/',
       await product.save()
       return res.status(200).json(product);
     } catch (e) {
-      console.log('Error in product:', e.message);
       res.status(500).send('Server Error')
     }
   }

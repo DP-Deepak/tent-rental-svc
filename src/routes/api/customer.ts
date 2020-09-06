@@ -15,13 +15,12 @@ customerRouter.get('/',
     middleware,
   async (req, res) => {
     try {
-      let customer = await CustomerModel.find({ })
+      let customer = await CustomerModel.find({ }).sort( { "customer_name": 1 } )
       if (!customer) {
         return res.status(404).send('No customer found')
       }
       return res.status(200).json(customer);
     } catch (e) {
-      console.log('Error in customer:', e.message);
       res.status(500).send('Server Error')
     }
   }
@@ -54,7 +53,6 @@ customerRouter.post('/',
       await customer.save()
       return res.status(200).json(customer);
     } catch (e) {
-      console.log('Error in customer:', e.message);
       res.status(500).send('Server Error')
     }
   }

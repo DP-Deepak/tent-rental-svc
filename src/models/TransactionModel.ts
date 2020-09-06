@@ -26,9 +26,10 @@ const TransactionSchema = new mongoose.Schema({
     required: true
   },
   transaction_id_parent: {
-    type: String
+    type: String,
+    default: 'N/A'
   },
-});
+}, { versionKey: false });
 // pre save hook
 TransactionSchema.pre('save', function preSave() {
   this.transaction_id = this._id.toString();
