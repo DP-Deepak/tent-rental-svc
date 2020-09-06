@@ -23,7 +23,7 @@ class ProductDialogBox extends React.Component {
       quantity_booked,
       price } = this.state
 
-    if (product_title && quantity_total && quantity_booked && price && quantity_total < quantity_booked) {
+    if (product_title && quantity_total>0 && quantity_booked && price && quantity_total >= quantity_booked) {
       try {
         await postData({
           product_title,

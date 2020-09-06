@@ -73,7 +73,7 @@ class TransactionDialogBox extends React.Component {
   saveReverseTransaction = async (openSnackbar) => {
     const { newReverseTransaction, quantity, transaction_id } = this.state
 
-    if (transaction_id && quantity) {
+    if (transaction_id && quantity > 0) {
       if (quantity < 0 && quantity > newReverseTransaction.quantity) {
         openSnackbar('Incorrect quantity')
       }
@@ -97,7 +97,7 @@ class TransactionDialogBox extends React.Component {
       }
     } else {
 
-      openSnackbar('Please fill all the details')
+      openSnackbar('Please fill correct details')
     }
   }
   onChangeHandler = field => (event) => {
