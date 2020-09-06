@@ -10,7 +10,7 @@ It should be on master branch.(Default)
 
 Run the command :-
 
-Instal the packages.
+Install the packages.
 
 ### `npm i`
 
